@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Для мамы ❤️</title>
+    <link rel="stylesheet" href="style.css">
+        <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Neucha&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Декор по бокам (листья) -->
+    <div class="vines left"></div>
+    <div class="vines right"></div>
+    
+    <!-- Летающие элементы -->
+    <span class="bee">🐝</span>
+    <span class="heart">❤️</span>
+    <span class="butterfly">🦋</span>
+
+    <div class="container">
+        <!-- Лента с заголовком -->
+        <div class="ribbon">
+            <h1 class="title">pick a flower!</h1>
+        </div>
+        <p class="subtitle">Выбери цветочек, мама!</p>
+        
+                <div class="flowers-container">
+            <!-- Подсолнух -->
+            <div class="flower" onclick="showMessage('sunflower')">
+                <span>🌻</span>
+            </div>
+            <!-- Ромашка -->
+            <div class="flower" onclick="showMessage('daisy')">
+                <span>🌼</span>
+            </div>
+            <!-- Фиалка (или любой другой цветок) -->
+            <div class="flower" onclick="showMessage('violet')">
+                <span>🌸</span>
+            </div>
+        </div>
+        
+                      <div class="nav-buttons">
+            <!-- Теперь это ссылка на новую страницу, а не всплывающее окно -->
+            <a href="congrats.html" class="btn-main">💌 Открой меня</a>
+            <a href="music.html" class="btn-music">🎵 Послушай меня</a>
+            <a href="quotes.html" class="btn-music" style="background-color: #fbc02d; color: #4e342e;">📝 Прочти меня</a>
+        </div>
+
+    <!-- Всплывающее окно -->
+    <div id="modal" class="modal hidden">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title">Заголовок</h2>
+            <p id="modal-text">Текст поздравления...</p>
+            <button class="btn-back" onclick="closeModal()">Закрыть</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

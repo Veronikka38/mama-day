@@ -1,0 +1,869 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #fce4ec;
+    background-image: radial-gradient(#f8bbd0 1px, transparent 1px);
+    background-size: 20px 20px;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Листья по бокам */
+.vines {
+    position: absolute;
+    top: 0;
+    width: 60px;
+    height: 100%;
+    background-image: url('https://img.icons8.com/color/96/leaf.png');
+    background-repeat: repeat-y;
+    background-size: 50px;
+    z-index: 0;
+    opacity: 0.6;
+}
+.vines.left { left: 0; transform: scaleX(-1); }
+.vines.right { right: 0; }
+
+/* Летающие элементы */
+.bee, .heart, .butterfly {
+    position: absolute;
+    font-size: 35px;
+    z-index: 1;
+    animation: float 4s ease-in-out infinite;
+}
+.bee { top: 15%; left: 10%; animation-delay: 0s; }
+.heart { top: 20%; right: 15%; font-size: 40px; animation-delay: 1s; }
+.butterfly { bottom: 20%; right: 20%; animation-delay: 2s; }
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(10deg); }
+}
+
+.container {
+    text-align: center;
+    z-index: 2;
+    padding: 20px;
+    width: 100%;
+    max-width: 500px;
+    position: relative;
+}
+
+/* Лента */
+.ribbon {
+    background: #f48fb1;
+    padding: 15px 30px;
+    border-radius: 10px;
+    display: inline-block;
+    box-shadow: 0 5px 15px rgba(216, 27, 96, 0.3);
+    border: 2px solid #fff;
+    transform: rotate(-2deg);
+    margin-bottom: 15px;
+    position: relative;
+}
+
+.ribbon::before, .ribbon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 20px;
+    height: 20px;
+    background: #f48fb1;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+.ribbon::before { left: -10px; }
+.ribbon::after { right: -10px; }
+
+.title {
+    font-family: 'Marck Script', cursive; /* Новый каллиграфический шрифт */
+    font-size: 4rem; /* Сделаем чуть больше, чтобы завитки были видны */
+    color: #fff;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    line-height: 1.1;
+}
+
+.subtitle {
+    font-family: 'Neucha', cursive; /* Уютный рукописный шрифт */
+    font-size: 1.4rem; /* Немного увеличим, так как рукописные шрифты кажутся меньше */
+    color: #880e4f;
+    margin-bottom: 30px;
+    font-weight: 400;
+}
+
+/* Цветы */
+.flowers-container {
+    display: flex;
+    justify-content: center;
+    gap: 25px; /* Расстояние между цветами */
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.flower {
+    cursor: pointer;
+    transition: transform 0.3s ease, filter 0.3s ease;
+    animation: sway 3s ease-in-out infinite;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flower span {
+    font-size: 70px; /* Размер эмодзи */
+    line-height: 1;
+    display: block;
+    filter: drop-shadow(0 5px 10px rgba(0,0,0,0.15)); /* Легкая тень для объема */
+}
+
+.flower:nth-child(2) { animation-delay: 0.5s; }
+.flower:nth-child(3) { animation-delay: 1s; }
+
+@keyframes sway {
+    0%, 100% { transform: rotate(-5deg); }
+    50% { transform: rotate(5deg); }
+}
+
+.flower:hover {
+    transform: scale(1.2) rotate(0deg);
+    filter: drop-shadow(0 0 15px rgba(216, 27, 96, 0.5));
+}
+
+.flower img {
+    width: 70px;
+    height: 70px;
+    object-fit: contain;
+    display: block;
+}
+
+/* --- Кнопки навигации --- */
+.nav-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+}
+
+/* Общие стили для всех кнопок */
+.btn-main, .btn-music {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-family: 'Neucha', cursive;
+    font-size: 1.25rem;
+    font-weight: 600;
+    text-decoration: none;
+    color: #fff;
+    cursor: pointer;
+    border: none;
+    box-shadow: 
+        0 6px 0 rgba(0,0,0,0.15),
+        0 8px 20px rgba(216, 27, 96, 0.25);
+    transition: all 0.2s ease;
+    overflow: hidden;
+    outline: none; /* Убираем стандартную обводку фокуса */
+}
+
+/* Убираем синюю подсветку при фокусе/клике */
+.btn-main:focus,
+.btn-music:focus,
+.btn-main:active,
+.btn-music:active {
+    outline: none;
+    box-shadow: 
+        0 6px 0 rgba(0,0,0,0.15),
+        0 8px 20px rgba(216, 27, 96, 0.25);
+}
+
+/* Блик, пробегающий по кнопке */
+.btn-main::before, .btn-music::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+        90deg, 
+        transparent, 
+        rgba(255,255,255,0.5), 
+        transparent
+    );
+    transition: left 0.5s ease;
+}
+
+.btn-main:hover::before, .btn-music:hover::before {
+    left: 100%;
+}
+
+/* Эффект нажатия: кнопка прижимается */
+.btn-main:hover, .btn-music:hover {
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 0 rgba(0,0,0,0.15),
+        0 12px 25px rgba(216, 27, 96, 0.35);
+}
+
+.btn-main:active, .btn-music:active {
+    transform: translateY(4px);
+    box-shadow: 
+        0 2px 0 rgba(0,0,0,0.15),
+        0 4px 10px rgba(216, 27, 96, 0.3);
+}
+
+/* Кнопка "Поздравление" — розовый градиент */
+.btn-main {
+    background: linear-gradient(135deg, #f8a5c2, #f48fb1);
+}
+
+.btn-main:hover {
+    background: linear-gradient(135deg, #f48fb1, #ec407a);
+}
+
+/* Кнопка "Наша песня" — насыщенный малиновый градиент */
+.btn-music {
+    background: linear-gradient(135deg, #ec407a, #ad1457);
+}
+
+.btn-music:hover {
+    background: linear-gradient(135deg, #d81b60, #880e4f);
+}
+
+/* Кнопка "Цитаты" — золотистый градиент */
+.btn-music[style*="fbc02d"] {
+    background: linear-gradient(135deg, #fdd835, #f9a825) !important;
+    color: #4e342e !important;
+}
+
+.btn-music[style*="fbc02d"]:hover {
+    background: linear-gradient(135deg, #fbc02d, #f57f17) !important;
+}
+/* Модальное окно */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    opacity: 1;
+    transition: opacity 0.3s ease;
+}
+
+.modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.modal-content {
+    background: #fff9c4;
+    padding: 30px;
+    border-radius: 15px;
+    max-width: 350px;
+    width: 90%;
+    text-align: center;
+    position: relative;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.2);
+    transform: rotate(-2deg);
+    border: 2px dashed #fbc02d;
+}
+
+.modal-content h2 {
+    font-family: 'Marck Script', cursive;
+    font-size: 2.8rem;
+    color: #d81b60;
+    margin-bottom: 15px;
+    line-height: 1.1;
+}
+
+.modal-content p {
+    font-family: 'Neucha', cursive; /* Текст поздравления будет как рукописный */
+    font-size: 1.3rem;
+    color: #4e342e;
+    line-height: 1.4;
+    margin-bottom: 20px;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 25px;
+    cursor: pointer;
+    color: #d81b60;
+}
+
+.btn-back {
+    background-color: #d81b60;
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+/* Адаптивность для телефонов */
+@media (max-width: 480px) {
+    .title { font-size: 2.8rem; }
+    .flower img { width: 60px; height: 60px; }
+    .flowers-container { gap: 10px; }
+    .vines { width: 40px; background-size: 40px; }
+    .ribbon { padding: 10px 20px; }
+}
+/* --- Стили для страницы музыки --- */
+body.music-page {
+    background-color: #fce4ec;
+    background-image: radial-gradient(#f8bbd0 1px, transparent 1px);
+    background-size: 20px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Летающие ноты */
+.floating-notes {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+.note {
+    position: absolute;
+    font-size: 40px;
+    opacity: 0.6;
+    animation: floatNote 6s ease-in-out infinite;
+}
+.n1 { top: 10%; left: 10%; animation-delay: 0s; }
+.n2 { top: 15%; right: 15%; animation-delay: 2s; }
+.n3 { bottom: 20%; left: 15%; animation-delay: 4s; }
+.n4 { bottom: 10%; right: 10%; animation-delay: 1s; }
+
+@keyframes floatNote {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-20px) rotate(15deg); }
+}
+
+/* --- Единая кнопка "Назад" для всех страниц --- */
+.back-link {
+    position: fixed; /* Фиксируем, чтобы кнопка всегда была на виду при прокрутке */
+    top: 20px;
+    left: 20px;
+    background: #ffffff;
+    color: #d81b60;
+    text-decoration: none;
+    padding: 10px 22px;
+    border-radius: 30px;
+    font-family: 'Neucha', cursive;
+    font-size: 1.2rem;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(216, 27, 96, 0.15);
+    border: 2px solid #f8bbd0;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    line-height: 1;
+}
+
+.back-link:hover {
+    background: #d81b60;
+    color: #ffffff;
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(216, 27, 96, 0.3);
+    border-color: #d81b60;
+}
+
+/* Адаптив для телефонов */
+@media (max-width: 480px) {
+    .back-link {
+        top: 15px;
+        left: 15px;
+        padding: 8px 16px;
+        font-size: 1rem;
+    }
+}
+/* Основной макет */
+.music-layout {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    max-width: 1100px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+    flex-wrap: wrap;
+}
+
+/* Обложка альбома — НОВЫЙ БЛОК */
+.album-cover {
+    position: relative;
+    z-index: 10; /* Обложка поверх пластинки */
+    margin-right: -120px; /* Сдвигает пластинку под обложку */
+    margin-bottom: 20px;
+}
+
+/* Обложка альбома — обновлённые стили */
+.album-cover img {
+    width: 280px; /* Теперь размер как у пластинки */
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 10px 10px 25px rgba(0,0,0,0.4);
+    transform: rotate(-12deg); /* Больший наклон */
+    border: 4px solid #fff;
+    transition: transform 0.3s;
+}
+.album-cover img:hover { transform: rotate(-5deg) scale(1.05); }
+
+/* Пластинка */
+.vinyl-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 5; /* Пластинка ПОД обложкой */
+    margin-bottom: -20px;
+}
+
+.vinyl {
+    width: 280px;
+    height: 280px;
+    background: #111;
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 5px 5px 25px rgba(0,0,0,0.5), inset 0 0 0 10px #222, inset 0 0 0 15px #111;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+.vinyl:hover { transform: scale(1.02); }
+
+/* Анимация вращения */
+.vinyl.playing {
+    animation: spin 3s linear infinite;
+}
+@keyframes spin {
+    100% { transform: rotate(360deg); }
+}
+
+.vinyl-center {
+    width: 80px;
+    height: 80px;
+    background: #f48fb1;
+    border-radius: 50%;
+    border: 4px solid #fff;
+    z-index: 2;
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Текст на пластинке */
+.vinyl-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-20deg);
+    width: 100%;
+    text-align: center;
+    font-family: 'Marck Script', cursive;
+    font-size: 1.4rem;
+    color: #fff;
+    z-index: 3;
+    pointer-events: none;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+    padding: 0 40px;
+    line-height: 1.2;
+}
+
+/* Письмо на нотной бумаге */
+.letter {
+    background: #fff;
+    padding: 40px; /* Больше внутренних отступов */
+    width: 400px; /* Было 300px */
+    min-height: 320px;
+    border-radius: 5px;
+    box-shadow: 5px 5px 20px rgba(0,0,0,0.15);
+    transform: rotate(3deg);
+    background-image: repeating-linear-gradient(
+        transparent,
+        transparent 34px,
+        #e0e0e0 35px
+    );
+    background-size: 100% 35px; /* Линии стали чуть шире, под стать тексту */
+    border: 1px solid #eee;
+    position: relative;
+    margin-left: 60px;
+}
+
+.letter::before {
+    content: '𝄞';
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    font-size: 50px; /* Ключ тоже больше */
+    color: #ccc;
+    opacity: 0.5;
+}
+
+.letter p {
+    font-family: 'Neucha', cursive;
+    font-size: 1.4rem; /* Было 1.2rem — текст крупнее */
+    color: #333;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    margin-top: 12px;
+    position: relative;
+    z-index: 1;
+}
+
+.letter .handwritten {
+    font-family: 'Marck Script', cursive;
+    font-size: 2rem; /* Было 1.6rem — рукописная часть крупнее */
+    color: #d81b60;
+    margin-top: 25px;
+    transform: rotate(-1deg);
+}
+
+@media (max-width: 768px) {
+    .music-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+    .album-cover {
+        margin-right: 0;
+        margin-bottom: 0;
+    }
+    .album-cover img {
+        width: 220px;
+        transform: rotate(-5deg);
+    }
+    .letter {
+        margin-left: 0;
+        width: 100%; /* Растягиваем на всю ширину контейнера */
+        max-width: 340px; /* Но не больше 340px */
+        padding: 25px;
+        min-height: auto;
+        background-size: 100% 30px;
+        background-image: repeating-linear-gradient(
+            transparent,
+            transparent 29px,
+            #e0e0e0 30px
+        );
+    }
+    .letter p {
+        font-size: 1.15rem;
+        margin-top: 10px;
+    }
+    .letter .handwritten {
+        font-size: 1.5rem;
+    }
+    .letter::before {
+        font-size: 36px;
+    }
+    .vinyl { width: 220px; height: 220px; }
+    .vinyl-text { font-size: 1.1rem; padding: 0 30px; }
+}
+/* --- Стили для страницы цитат --- */
+body.quotes-page {
+    background-color: #fce4ec;
+    background-image: radial-gradient(#f8bbd0 1px, transparent 1px);
+    background-size: 20px 20px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px 40px;
+    position: relative;
+    overflow-x: hidden;
+}
+
+/* Летающие элементы */
+.floating-elements {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+}
+.float-item {
+    position: absolute;
+    font-size: 30px;
+    opacity: 0.6;
+    animation: floatUp 8s ease-in-out infinite;
+}
+.f1 { top: 10%; left: 5%; animation-delay: 0s; }
+.f2 { top: 20%; right: 10%; animation-delay: 2s; }
+.f3 { bottom: 15%; left: 15%; animation-delay: 4s; }
+.f4 { bottom: 25%; right: 5%; animation-delay: 6s; }
+.f5 { top: 50%; left: 50%; animation-delay: 1s; }
+
+@keyframes floatUp {
+    0%, 100% { transform: translateY(0) rotate(0deg) scale(1); }
+    50% { transform: translateY(-25px) rotate(15deg) scale(1.2); }
+}
+
+/* Заголовок */
+.quotes-title {
+    font-family: 'Marck Script', cursive;
+    font-size: 3.5rem;
+    color: #d81b60;
+    margin-bottom: 5px;
+    text-align: center;
+    z-index: 2;
+    text-shadow: 2px 2px 4px rgba(216, 27, 96, 0.1);
+}
+
+.quotes-subtitle {
+    font-family: 'Neucha', cursive;
+    font-size: 1.3rem;
+    color: #880e4f;
+    margin-bottom: 40px;
+    text-align: center;
+    z-index: 2;
+}
+
+/* Контейнер для стикеров */
+.quotes-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    max-width: 900px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Общие стили для стикеров */
+.sticky-note {
+    position: relative;
+    padding: 25px 20px;
+    border-radius: 2px;
+    box-shadow: 3px 5px 15px rgba(0,0,0,0.15);
+    font-family: 'Neucha', cursive;
+    font-size: 1.25rem;
+    color: #4e342e;
+    line-height: 1.4;
+    width: 220px;
+    min-height: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: default;
+}
+
+/* При наведении стикер приподнимается и выравнивается */
+.sticky-note:hover {
+    transform: scale(1.1) rotate(0deg) translateY(-10px) !important;
+    box-shadow: 8px 15px 30px rgba(0,0,0,0.2);
+    z-index: 10;
+}
+
+/* Скотч (Washi Tape) */
+.tape {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%) rotate(-3deg);
+    width: 80px;
+    height: 25px;
+    background: rgba(255, 255, 255, 0.7);
+    border-left: 2px dashed rgba(0,0,0,0.1);
+    border-right: 2px dashed rgba(0,0,0,0.1);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    z-index: 3;
+    backdrop-filter: blur(2px);
+}
+
+/* Индивидуальные стили и повороты для каждого стикера */
+.q1 { transform: rotate(-6deg); background: #fff9c4; }
+.q1 .tape { background: rgba(255, 193, 7, 0.6); }
+
+.q2 { transform: rotate(4deg); background: #ffe0b2; }
+.q2 .tape { background: rgba(255, 152, 0, 0.6); }
+
+.q3 { transform: rotate(-3deg); background: #f8bbd0; }
+.q3 .tape { background: rgba(233, 30, 99, 0.5); }
+
+.q4 { transform: rotate(7deg); background: #c8e6c9; }
+.q4 .tape { background: rgba(76, 175, 80, 0.5); }
+
+.q5 { transform: rotate(-5deg); background: #d1c4e9; }
+.q5 .tape { background: rgba(103, 58, 183, 0.5); }
+
+.q6 { transform: rotate(3deg); background: #b3e5fc; }
+.q6 .tape { background: rgba(3, 169, 244, 0.5); }
+
+/* Адаптивность для телефонов */
+@media (max-width: 768px) {
+    .quotes-title { font-size: 2.8rem; }
+    .quotes-subtitle { font-size: 1.1rem; }
+    .quotes-container { gap: 20px; }
+    .sticky-note { width: 160px; min-height: 140px; padding: 20px 15px; font-size: 1.1rem; }
+    .tape { width: 60px; height: 20px; top: -10px; }
+    .float-item { font-size: 20px; }
+}
+/* --- Стили для страницы поздравления --- */
+body.congrats-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    position: relative;
+    overflow: hidden;
+    
+    /* ФОН С ЦВЕТАМИ */
+    /* Замените ссылку ниже на свою картинку, если хотите */
+    background-image: url('pic.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: scroll; /* scroll лучше для мобильных */
+}
+
+/* Затемняющий слой поверх фона, чтобы текст читался */
+body.congrats-page::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255, 240, 245, 0.4); /* Легкий розоватый оттенок */
+    backdrop-filter: blur(2px); /* Легкое размытие фона */
+    z-index: 0;
+}
+
+/* Контейнер для письма */
+.letter-container {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    max-width: 550px;
+    animation: floatIn 1s ease-out forwards;
+}
+
+@keyframes floatIn {
+    0% { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* Письмо */
+.letter-paper {
+    background: #fffdf5;
+    padding: 45px;
+    width: 100%;
+    border-radius: 5px;
+    box-shadow: 10px 15px 40px rgba(0,0,0,0.2), 0 0 0 1px rgba(255,255,255,0.5) inset;
+    transform: rotate(-1deg);
+    position: relative;
+    border: 1px solid #f0e6d2;
+}
+
+/* Эффект загнутого уголка */
+.letter-paper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 50px;
+    height: 50px;
+    background: linear-gradient(135deg, transparent 50%, #fce4ec 50%);
+    box-shadow: -3px -3px 8px rgba(0,0,0,0.1);
+    border-radius: 0 0 5px 0;
+}
+
+/* Текст письма */
+.letter-paper .greeting {
+    font-family: 'Marck Script', cursive;
+    font-size: 2.2rem;
+    color: #d81b60;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.letter-paper .main-text {
+    font-family: 'Marck Script', cursive;
+    font-size: 1.6rem;
+    color: #4e342e;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    text-align: justify;
+}
+
+.letter-paper .signature {
+    font-family: 'Marck Script', cursive;
+    font-size: 1.8rem;
+    color: #d81b60;
+    text-align: right;
+    margin-top: 35px;
+}
+
+/* --- Падающие лепестки --- */
+.petals {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    font-size: 25px;
+    opacity: 0.8;
+    animation: fall linear infinite;
+}
+
+/* Настройки для каждого лепестка */
+.p1 { left: 10%; animation-duration: 8s; animation-delay: 0s; }
+.p2 { left: 30%; animation-duration: 10s; animation-delay: 2s; font-size: 30px; }
+.p3 { left: 50%; animation-duration: 7s; animation-delay: 4s; }
+.p4 { left: 70%; animation-duration: 12s; animation-delay: 1s; font-size: 20px; }
+.p5 { left: 85%; animation-duration: 9s; animation-delay: 3s; }
+.p6 { left: 45%; animation-duration: 11s; animation-delay: 5s; font-size: 35px; }
+
+@keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.8; }
+    90% { opacity: 0.8; }
+    100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+}
+
+/* Адаптивность для телефонов */
+@media (max-width: 768px) {
+    .letter-paper {
+        padding: 30px 25px;
+        transform: rotate(0deg); /* На телефоне выравниваем письмо */
+    }
+    .letter-paper .greeting { font-size: 1.9rem; }
+    .letter-paper .main-text { font-size: 1.4rem; }
+    .letter-paper .signature { font-size: 1.6rem; }
+    .petal { font-size: 18px; }
+}

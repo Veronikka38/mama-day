@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Послушай 🎵</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Marck+Script&family=Neucha&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body class="music-page">
+    
+    <!-- Летающие ноты на фоне -->
+    <div class="floating-notes">
+        <span class="note n1">🎵</span>
+        <span class="note n2">🎶</span>
+        <span class="note n3">🎵</span>
+        <span class="note n4">🎶</span>
+    </div>
+        <a href="index.html" class="back-link">← Назад</a>
+
+    <div class="music-layout">
+        <!-- Левая часть: Обложка альбома -->
+        <div class="album-cover">
+            <!-- ЗАМЕНИТЕ ЭТУ ССЫЛКУ НА ФОТО ВАШЕГО АЛЬБОМА ИЛИ ЛЮБУЮ КАРТИНКУ -->
+           <img src="pkk.jpg" alt="Обложка альбома">
+        </div>
+
+        <!-- Центр: Пластинка -->
+        <div class="vinyl-container">
+            <div class="vinyl" id="vinyl" onclick="toggleMusic()">
+                <div class="vinyl-center"></div>
+                <div class="vinyl-text">Включи звук и нажми на меня!</div>
+            </div>
+        </div>
+
+        <!-- Правая часть: Письмо на нотной бумаге -->
+        <div class="letter">
+            <p>Никто не любит тебя так, как умеет любить мама. Ничто не спасет тебя, как руки матери.</p>
+            <p class="handwritten">"No one loves you like a mother can. Nothing saves you like a mothers hands"</p>
+        </div>
+    </div>
+
+    <!-- Аудио плеер -->
+        <!-- Аудио: начинает играть с 1:00 -->
+    <audio id="bg-music" loop>
+        <source src="mother.mp3#t=72" type="audio/mpeg">
+        Ваш браузер не поддерживает аудио.
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
